@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="ExpenseTracker" Class="ExpenseTrackerDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=(localdb)\v11.0;Initial Catalog=ExpenseTracker;Integrated Security=True" SettingsObjectName="ExpenseTracker.Properties.Settings" SettingsPropertyName="ExpenseTrackerConnectionString1" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.ExpenseDetail" Member="ExpenseDetails">
+    <Type Name="ExpenseDetail">
+      <Column Name="ExpID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="ExpenseCategory" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
+      <Column Name="Details" Type="System.String" DbType="VarChar(250)" CanBeNull="true" />
+      <Column Name="Price" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Date" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ExpenseCategory" Member="ExpenseCategories">
+    <Type Name="ExpenseCategory">
+      <Column Name="CatID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Category" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ExpenseIncoming" Member="ExpenseIncomings">
+    <Type Name="ExpenseIncoming">
+      <Column Name="IncID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Price" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </Type>
+  </Table>
+</Database>

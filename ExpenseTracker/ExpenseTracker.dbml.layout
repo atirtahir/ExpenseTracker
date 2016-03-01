@@ -2,22 +2,22 @@
 <ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.5" name="ExpenseTracker">
   <DataContextMoniker Name="/ExpenseTrackerDataContext" />
   <nestedChildShapes>
-    <classShape Id="1e53cea5-d6a6-4e24-b68d-aa900f51774b" absoluteBounds="0.75, 0.75, 2, 1.7708968098958331">
-      <DataClassMoniker Name="/ExpenseTrackerDataContext/ExpenseDetail" />
-      <nestedChildShapes>
-        <elementListCompartment Id="8950b679-0cae-40c1-8cc9-19f6fc31eb84" absoluteBounds="0.765, 1.21, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
-      </nestedChildShapes>
-    </classShape>
-    <classShape Id="9edc6ae9-78ff-4d73-b06b-3587bc9f0c04" absoluteBounds="3.75, 0.75, 2, 1.1939925130208335">
+    <classShape Id="c9d27a40-d3bd-4005-b8aa-632bc53a64ed" absoluteBounds="0.75, 0.75, 2, 1.1939925130208335">
       <DataClassMoniker Name="/ExpenseTrackerDataContext/ExpenseCategory" />
       <nestedChildShapes>
-        <elementListCompartment Id="f9fdf3c8-d64e-417d-a3d9-cb5fbb78b0c7" absoluteBounds="3.765, 1.21, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="05a883b9-4541-4224-84fb-d3b6d1b150c1" absoluteBounds="0.765, 1.21, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="6ed6931b-c391-4595-b898-0b54d14e543e" absoluteBounds="3.375, 2.375, 2, 1.1939925130208333">
+    <classShape Id="2a83d828-6b53-4e6a-abea-f15714a044ed" absoluteBounds="0.75, 2.75, 2, 1.3862939453125005">
       <DataClassMoniker Name="/ExpenseTrackerDataContext/ExpenseIncoming" />
       <nestedChildShapes>
-        <elementListCompartment Id="af6fdfd9-0136-4927-8e9e-4d8e92bf56d9" absoluteBounds="3.3899999999999997, 2.835, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="a59f8eb7-451e-4b69-af02-75769b0903ce" absoluteBounds="0.765, 3.21, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="daa430ca-da16-484b-a7b7-3dfdcbfea059" absoluteBounds="4.5, 2, 2, 2.1554996744791666">
+      <DataClassMoniker Name="/ExpenseTrackerDataContext/ExpenseDetail" />
+      <nestedChildShapes>
+        <elementListCompartment Id="d3f21ea6-b0b2-4090-98ef-99c59797bc9d" absoluteBounds="4.515, 2.46, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
   </nestedChildShapes>

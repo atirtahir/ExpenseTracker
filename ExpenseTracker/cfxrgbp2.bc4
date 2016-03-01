@@ -41,33 +41,31 @@ namespace ExpenseTracker
         {
             try
             {
-                var updateData = (from currentPrice in expenseTracker.ExpenseIncomings
-                                  select currentPrice.Price).FirstOrDefault();
-                ExpenseIncoming incoming = expenseTracker.ExpenseIncomings.Single(a => a.Price == updateData);
-                incoming.Price = finalAmount;
-
-                expenseTracker.SubmitChanges();
+                 expenseTracker.ExpenseIncomings.InsertOnSubmit(new ExpenseIncoming()
+                        {
+                            //ExpenseCategory = categoryName,
+                            Price = finalAmount
+                        });
+                    expenseTracker.SubmitChanges();
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.Message);   
             }
         }
         private int GetIncomePrice()
         {
             try
             {
-                //var totalPrice = expenseTracker.ExpenseIncomings;
-                //var rateSum = totalPrice.Sum(d => d.Price);
-                var totalPrice = (from price in expenseTracker.ExpenseIncomings
-                                  select price.Price).FirstOrDefault();
-                int finalAmount = Convert.ToInt32(totalPrice);
-
+                var totalPrice = expenseTracker.ExpenseIncomings;
+                var rateSum = totalPrice.Sum(d => d.Price);
+                int finalAmount = Convert.ToInt32(rateSum);
+               
                 return finalAmount;
             }
             catch (Exception ex)
             {
-                MessageBox.Show("There are no records");
+                MessageBox.Show(ex.Message);
                 return 0;
             }
         }
@@ -107,16 +105,12 @@ namespace ExpenseTracker
                 dataGridView1.DataSource = fetchCategories;
                 dataGridView1.Columns[0].Visible = false;
                 dataGridView1.Columns[1].Width = 70;
-                dataGridView1.Columns[3].Width = 70;
-                dataGridView1.Columns[2].Width = 185;
+                dataGridView1.Columns[3].Width = 200;
 
-                var updateData = (from currentPrice in expenseTracker.ExpenseIncomings
-                                  select currentPrice.Price).FirstOrDefault();
-                label3.Text = updateData.ToString();
             }
             catch (Exception ex)
             {
-                MessageBox.Show("There are no records");
+                MessageBox.Show(ex.Message);
             }
         }
         private void button1_Click(object sender, EventArgs e)
@@ -137,18 +131,13 @@ namespace ExpenseTracker
                             Details = details,
                             Price = price,
                             RemainingAmount = incomePrice - price,
-                            Date = currentDate,
-                            CurrentTotalIncome = incomePrice //your total incom against this expense
+                            Date = currentDate
                         });
-
                     expenseTracker.SubmitChanges();
                     MessageBox.Show("Expense Detail Added");
 
                     richTextBox1.Text = "";
                     textBox1.Text = "";
-
-                    int priceToUpdate = incomePrice - price;
-                    UpdateTotalIncome(priceToUpdate);
 
                     LoadGridView();
                     LoadComboBox();
@@ -200,36 +189,17 @@ namespace ExpenseTracker
             try
             {
                 int incomingPrice = Convert.ToInt32(textBox2.Text);
-                var data = (from currentPrice in expenseTracker.ExpenseIncomings
-                            select currentPrice.Price).ToList();
-
-
-
-                if (data.Count == 0)
-                {
-                    expenseTracker.ExpenseIncomings.InsertOnSubmit(new ExpenseIncoming()
+                expenseTracker.ExpenseIncomings.InsertOnSubmit(new ExpenseIncoming()
                     {
                         Price = incomingPrice
                     });
-                    expenseTracker.SubmitChanges();
-                }
-                else
-                {
-
-                    var updateData = (from currentPrice in expenseTracker.ExpenseIncomings
-                                                  select currentPrice.Price).FirstOrDefault();
-                    ExpenseIncoming incoming = expenseTracker.ExpenseIncomings.Single(a => a.Price == updateData);
-                    incoming.Price = updateData + incomingPrice;
-
-                    expenseTracker.SubmitChanges();
-                }
-
+                expenseTracker.SubmitChanges();
                 textBox2.Text = "";
                 MessageBox.Show("Incoming Price Added");
             }
             catch (Exception ex)
             {
-                MessageBox.Show("There are no records");
+                MessageBox.Show(ex.Message);
             }
         }
     }

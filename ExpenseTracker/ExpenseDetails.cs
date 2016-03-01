@@ -7,13 +7,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using GroupDocs.Assembly;
+using System.IO;
 
 namespace ExpenseTracker
 {
     public partial class ExpenseDetails : Form
     {
 
-        private ExpenseTrackerDataContext expenseTracker = new ExpenseTrackerDataContext();
+        public ExpenseTrackerDataContext expenseTracker = new ExpenseTrackerDataContext();
 
         public ExpenseDetails()
         {
@@ -116,7 +118,7 @@ namespace ExpenseTracker
             }
             catch (Exception ex)
             {
-                MessageBox.Show("There are no records");
+                MessageBox.Show(ex.Message);
             }
         }
         private void button1_Click(object sender, EventArgs e)
@@ -151,7 +153,7 @@ namespace ExpenseTracker
                     UpdateTotalIncome(priceToUpdate);
 
                     LoadGridView();
-                    LoadComboBox();
+                    //LoadComboBox();
                 }
                 else
                 {
@@ -202,9 +204,6 @@ namespace ExpenseTracker
                 int incomingPrice = Convert.ToInt32(textBox2.Text);
                 var data = (from currentPrice in expenseTracker.ExpenseIncomings
                             select currentPrice.Price).ToList();
-
-
-
                 if (data.Count == 0)
                 {
                     expenseTracker.ExpenseIncomings.InsertOnSubmit(new ExpenseIncoming()
@@ -212,6 +211,7 @@ namespace ExpenseTracker
                         Price = incomingPrice
                     });
                     expenseTracker.SubmitChanges();
+                    LoadGridView();
                 }
                 else
                 {
@@ -220,10 +220,9 @@ namespace ExpenseTracker
                                                   select currentPrice.Price).FirstOrDefault();
                     ExpenseIncoming incoming = expenseTracker.ExpenseIncomings.Single(a => a.Price == updateData);
                     incoming.Price = updateData + incomingPrice;
-
                     expenseTracker.SubmitChanges();
+                    LoadGridView();
                 }
-
                 textBox2.Text = "";
                 MessageBox.Show("Incoming Price Added");
             }
@@ -232,5 +231,25 @@ namespace ExpenseTracker
                 MessageBox.Show("There are no records");
             }
         }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            //Setting up source word template 
+            FileStream template = File.OpenRead("../../../../Data/Samples/Source/Expense Sheet.docx");
+            //Setting up destination word report 
+            FileStream output = File.Create("../../../../Data/Samples/Destination/Expense Sheet Report.docx");
+
+            //Generate the report
+            DocumentAssembler doc = new DocumentAssembler();
+            //Beside data source and output path it takes dataSourceObject and dataSourceString
+            doc.AssembleDocument(template, output, GenerateReport(), "ExpenseDetails");
+        }
+
+        public static IEnumerable<ExpenseDetail> GenerateReport()
+        {
+            ExpenseTrackerDataContext expenseTracker = new ExpenseTrackerDataContext();
+            return expenseTracker.ExpenseDetails;
+        }
     }
+
 }
